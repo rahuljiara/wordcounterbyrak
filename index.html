@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter - Rahul Ji Ara</title>
+
+    <style>
+        * {
+            margin: 0;
+        }
+
+        body {
+
+            width: 90%;
+            margin: 0 5%;
+            text-align: center;
+            background: rgba(0, 254, 0, 0.449);
+        }
+
+        .container {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .logo {
+            position: absolute;
+            top: 5%;
+        }
+
+        h1 {
+            width: 100%;
+            height: 40px;
+            background: rgba(134, 133, 133, 0.545);
+            padding: 5px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .tool {
+            position: absolute;
+            top: calc(10% + 40px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .tool .bg {
+            background-color: rgb(37, 102, 0);
+            color: rgb(255, 255, 255);
+            margin: 10px;
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .tool .bg:hover {
+            background: black;
+            color: greenyellow;
+        }
+
+        .tool img {
+            position: relative;
+            background: white;
+            border-radius: 50%;
+            width: 40px;
+        }
+
+        h5 {
+            display: none;
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            color: rgb(254, 0, 0);
+            background-color: black;
+            padding:3px 5px;
+            border-radius:50px;
+        }
+
+        .input-box {
+
+            position: absolute;
+            top: calc(20% + 40px);
+            width: 100%;
+            height: 60vh;
+        }
+
+        textarea {
+            height: 60vh;
+            width: 96.5%;
+            outline: none;
+            padding: 1% 2%;
+            resize: none;
+        }
+
+        span {
+            text-align: center;
+        }
+
+
+        @media screen and (max-width:500px) {
+            html {
+                font-size: 80%;
+            }
+
+            .input-box {
+                top: 40%;
+                height: 40vh;
+            }
+
+            .tool .bg {
+                height: 30px;
+                width: 30px;
+            }
+
+            textarea {
+                height: 40vh;
+            }
+        }
+
+        @media screen and (max-width:300px) {
+            html{
+                font-size: 60%;
+            }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="logo">Word Counter By Rak </h1>
+        <div class="tool">
+            <p class="bg" id="AA">AA</p>
+            <p class="bg" id="aa">aa</p>
+            <p class="bg" id="Aa">Aa</p>
+            <p class="bg" id="I"><i>I</i></p>
+            <p class="bg" id="B"><b>B</b></p>
+            <p class="bg" id="U"><u>U</u></p>
+            <img src="https://cdn-icons-png.flaticon.com/512/181/181531.png" id="copy">
+            
+        </div>
+
+
+        <div class="input-box">
+            <h5 class="coppied">coppied</h5>
+            <textarea name="" id="inputField" cols="100" rows="25" autofocus=""></textarea>
+            <h1 class="word-disc"><span id="char">0</span> Characters ,
+                <span id="word">0</span> Words
+            </h1>
+        </div>
+    </div>
+
+    <script>
+        let uc = document.getElementById('AA');
+        let lc = document.getElementById('aa');
+        let tc = document.getElementById('Aa');
+        let i = document.getElementById('I');
+        let b = document.getElementById('B');
+        let u = document.getElementById('U');
+        let copy = document.getElementById('copy');
+        let coppied = document.querySelector('.coppied');
+
+        let char = document.getElementById('char');
+        let word = document.getElementById('word');
+        let inputField = document.getElementById('inputField');
+
+
+
+        inputField.addEventListener('input', function () {
+            //    inputcopy.innerHTML = inputField.value;
+            var text = this.value; // gives inputed value
+            char.innerHTML = text.length; // gives length of inputed value
+            var totalword = text.split(" ");
+            text = text.trim(" ");
+            var removespace = totalword.filter(function (elm) { //filter splited word not to take blank array.
+                return elm != "";
+            })
+            word.innerHTML = removespace.length;
+        })
+
+        uc.addEventListener('click', () => {
+            inputField.style.textTransform = "upperCase"
+        })
+        lc.addEventListener('click', () => {
+            inputField.style.textTransform = "lowerCase"
+        })
+        tc.addEventListener('click', () => {
+            inputField.style.textTransform = "capitalize"
+        })
+        i.addEventListener('click', () => {
+            inputField.style.fontStyle = "italic";
+        })
+        b.addEventListener('click', () => {
+            inputField.style.fontWeight = "bold"
+        })
+        u.addEventListener('click', () => {
+            inputField.style.textDecoration = "underline"
+        })
+        copy.addEventListener('click', () => {
+            inputField.select()
+            document.execCommand("copy")
+            coppied.style.display = "block"
+            setInterval(() => {
+                coppied.style.display = "none"
+            }, 6000)
+        })
+    </script>
+</body>
+
+</html>
